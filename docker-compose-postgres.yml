@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres
+    container_name: local_pgdb
+    restart: always
+    networks:
+      - databases
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "cdr"
+      POSTGRES_PASSWORD: "cdr"
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8081:80"
+    networks:
+      - databases
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "cdr@smile.com"
+      PGADMIN_DEFAULT_PASSWORD: "cdr"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_pgdata:
+  pgadmin-data:
+
+networks:
+  databases:
+    external: true

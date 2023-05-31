@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  listener:
+    image: listener:1.0
+    ports:
+      - 9100:9100
+    networks:
+      - databases
+      - proxy
+
+networks:
+  databases:
+    external: true
+  proxy:
+    external: true

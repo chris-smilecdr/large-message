@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  admin:
+    image: telstra-admin:1.4
+    ports:
+      - "9100:9100"
+    networks:
+     - databases
+     - jms
+
+networks:
+  databases:
+    external: true
+  jms:
+    external: true
